@@ -47,6 +47,22 @@ class _HomePageState extends State<HomePage> {
                 height: 20,
               ),
               Categories(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Special For You",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
+                  ),
+                  Text(
+                    "See all",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              )
             ],
           ),
         ),

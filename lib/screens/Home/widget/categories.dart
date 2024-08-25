@@ -14,25 +14,27 @@ class Categories extends StatelessWidget {
           return Column(
             children: [
               Container(
-                height: 65,
-                width: 65,
+                height: 64,
+                width: 64,
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(categories[index].image),
-                        fit: BoxFit.cover)),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(categories[index].image),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              SizedBox(height: 5),
               Text(
                 categories[index].title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              )
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
             ],
           );
         },
         itemCount: categories.length,
-        separatorBuilder: (context, index) => SizedBox(height: 20),
+        separatorBuilder: (context, index) =>
+            SizedBox(width: 20), // Horizontal space between items
       ),
     );
   }
