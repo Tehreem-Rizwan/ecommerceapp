@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "668768674791",
+    "project_id": "gothic-avenue-417610",
+    "storage_bucket": "gothic-avenue-417610.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668768674791:android:086bafaf5e268cfcfed342",
+        "android_client_info": {
+          "package_name": "com.example.doctorsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGRSM-Us-kthLfz4yBSvetH-wBa-o7klk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668768674791:android:372504fc6590af6afed342",
+        "android_client_info": {
+          "package_name": "com.example.ecommerceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGRSM-Us-kthLfz4yBSvetH-wBa-o7klk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
