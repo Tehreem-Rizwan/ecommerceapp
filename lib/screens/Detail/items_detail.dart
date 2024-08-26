@@ -59,14 +59,29 @@ class ItemDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 15,
+                    ),
+                    Text(
+                      product.review,
+                      style: TextStyle(fontSize: 15, color: Colors.grey),
                     )
                   ],
                 )
               ],
             ),
+            SizedBox(
+              width: 70,
+            ),
+            Text.rich(
+              TextSpan(children: [
+                TextSpan(text: "Seller: ", style: TextStyle(fontSize: 16)),
+                TextSpan(
+                    text: product.seller,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+              ]),
+            )
           ],
-        )
+        ),
       ],
     );
   }

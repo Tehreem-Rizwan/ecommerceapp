@@ -29,14 +29,17 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Center(
-                  child: Image.asset(
-                    product.image,
-                    height: 130,
-                    width: 130,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: product.image,
+                    child: Image.asset(
+                      product.image,
+                      height: 150,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -76,7 +79,27 @@ class ProductCard extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+          Positioned(
+              child: Align(
+            alignment: Alignment.topRight,
+            child: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: kprimaryColor,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(10))),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.favorite_border,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                )),
+          ))
         ],
       ),
     );
