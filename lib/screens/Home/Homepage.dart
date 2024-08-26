@@ -1,7 +1,9 @@
+import 'package:ecommerceapp/models/product_model.dart';
 import 'package:ecommerceapp/screens/Home/widget/Searchbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/categories.dart';
 import 'package:ecommerceapp/screens/Home/widget/home_appbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/image_slider.dart';
+import 'package:ecommerceapp/screens/Home/widget/product_cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Categories(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Special For You",
@@ -58,11 +60,20 @@ class _HomePageState extends State<HomePage> {
                     "See all",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
                 ],
-              )
+              ),
+              GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.78,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    return ProductCard(product: products[index]);
+                  })
             ],
           ),
         ),
