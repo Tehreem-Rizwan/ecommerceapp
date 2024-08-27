@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/models/product_model.dart';
+import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class _AddtoCartState extends State<AddtoCart> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = CartProvider.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
@@ -35,7 +37,13 @@ class _AddtoCartState extends State<AddtoCart> {
                 child: Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (currentIndex != 1) {
+                            setState(() {
+                              currentIndex--;
+                            });
+                          }
+                        },
                         iconSize: 18,
                         icon: Icon(Icons.remove, color: Colors.white)),
                     SizedBox(
@@ -50,14 +58,31 @@ class _AddtoCartState extends State<AddtoCart> {
                       width: 5,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            currentIndex++;
+                          });
+                        },
                         iconSize: 18,
                         icon: Icon(Icons.add, color: Colors.white))
                   ],
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  provider.toggleFavorite(widget.product);
+                  const snackBar = SnackBar(
+                    content: Text(
+                      "Successfully added",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    duration: Duration(seconds: 1),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
                 child: Container(
                   height: 55,
                   decoration: BoxDecoration(

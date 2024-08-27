@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/firebase_options.dart';
+import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MultiProvider(
-      providers: [],
+      providers: [ChangeNotifierProvider(create: (_) => CartProvider())],
       child:
           MaterialApp(debugShowCheckedModeBanner: false, home: BottomNavBar()));
 }
