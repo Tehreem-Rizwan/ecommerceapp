@@ -30,7 +30,9 @@ class _DetailScreenState extends State<DetailScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            DetailsAppbar(),
+            DetailsAppbar(
+              product: widget.product,
+            ),
             DetailImageSlider(
                 onChange: (index) {
                   setState(() {

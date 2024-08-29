@@ -1,7 +1,8 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/Home/Homepage.dart';
+import 'package:ecommerceapp/screens/Profile/profile.dart';
 import 'package:ecommerceapp/screens/cart/Cart_screen.dart';
-import 'package:ecommerceapp/screens/favourite.dart';
+import 'package:ecommerceapp/screens/Favourite/favourite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     FavouriteScreen(),
     HomePage(),
     CartScreen(),
-    Scaffold()
+    Profile()
   ];
   @override
   Widget build(BuildContext context) {

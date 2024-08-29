@@ -1,40 +1,60 @@
 import 'package:ecommerceapp/models/category.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Categories extends StatelessWidget {
+class Categories extends StatefulWidget {
   const Categories({super.key});
 
+  @override
+  State<Categories> createState() => _CategoriesState();
+}
+
+class _CategoriesState extends State<Categories> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
-      child: ListView.separated(
+      child: ListView.builder(
+        itemCount: categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                height: 64,
-                width: 64,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(categories[index].image),
-                    fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            child: Container(
+              padding: EdgeInsetsDirectional.all(5),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: selectedIndex == index
+                      ? Colors.blue[200]
+                      : Colors.transparent),
+              child: Column(
+                children: [
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(categories[index].image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(height: 5),
+                  Text(
+                    categories[index].title,
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              SizedBox(height: 5),
-              Text(
-                categories[index].title,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              ),
-            ],
+            ),
           );
         },
-        itemCount: categories.length,
-        separatorBuilder: (context, index) =>
-            SizedBox(width: 20), // Horizontal space between items
       ),
     );
   }
