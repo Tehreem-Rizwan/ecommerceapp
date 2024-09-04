@@ -1,8 +1,8 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/provider/cart_provider.dart';
+import 'package:ecommerceapp/screens/payment/payment_method_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CheckBox extends StatelessWidget {
   const CheckBox({super.key});
@@ -99,7 +99,10 @@ class CheckBox extends StatelessWidget {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PaymentMethod()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: kprimaryColor,
               minimumSize: Size(double.infinity, 55),
