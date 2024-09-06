@@ -74,10 +74,15 @@ class ItemDetails extends StatelessWidget {
             ),
             Text.rich(
               TextSpan(children: [
-                TextSpan(text: "Seller: ", style: TextStyle(fontSize: 16)),
+                TextSpan(
+                    text: "Seller: ",
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 TextSpan(
                     text: product.seller,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+                    style: TextStyle(
+                      fontSize: 14,
+                    ))
               ]),
             )
           ],
