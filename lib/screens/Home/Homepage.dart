@@ -3,7 +3,7 @@ import 'package:ecommerceapp/models/product_model.dart';
 import 'package:ecommerceapp/screens/Home/widget/Searchbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/home_appbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/image_slider.dart';
-import 'package:ecommerceapp/screens/Home/widget/product_cart.dart';
+import 'package:ecommerceapp/screens/Home/widget/product_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +17,42 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentSlider = 0;
   int selectedIndex = 0;
+  String searchQuery = '';
+
+  List<Product> allProducts = all; // Assume this is your list of all products
+  List<Product> filteredProducts = []; // Filtered list based on search query
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = allProducts; // Initially show all products
+  }
+
+  // This function will be called when the user types in the search bar
+  void _filterProducts(String query) {
+    setState(() {
+      searchQuery = query;
+      if (query.isEmpty) {
+        filteredProducts = allProducts; // If search is empty, show all products
+      } else {
+        filteredProducts = allProducts.where((product) {
+          return product.title.toLowerCase().contains(query.toLowerCase());
+        }).toList(); // Filter products based on the search query
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<List<Product>> selectedCategories = [
-      all,
+      filteredProducts, // Show the filtered products based on search
       shoes,
       beauty,
       womenFashion,
       jewelry,
       menFashion
     ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -35,17 +61,13 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 35,
-              ),
+              SizedBox(height: 35),
               CustomAppBar(),
-              SizedBox(
-                height: 20,
-              ),
-              mySearchBar(),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
+              mySearchBar(
+                  onSearch:
+                      _filterProducts), // Pass the search function to the search bar
+              SizedBox(height: 20),
               ImageSlider(
                 onChange: (value) {
                   setState(() {
@@ -54,9 +76,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 currentSlide: currentSlider,
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               SizedBox(
                 height: 130,
                 child: ListView.builder(
@@ -116,18 +136,21 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.78,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20),
-                  itemCount: selectedCategories[selectedIndex].length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                        product: selectedCategories[selectedIndex][index]);
-                  })
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.78,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                ),
+                itemCount: selectedCategories[selectedIndex].length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    product: selectedCategories[selectedIndex][index],
+                  );
+                },
+              ),
             ],
           ),
         ),

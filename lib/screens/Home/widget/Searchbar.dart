@@ -1,9 +1,9 @@
-import 'package:ecommerceapp/components/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class mySearchBar extends StatelessWidget {
-  const mySearchBar({super.key});
+  final Function(String) onSearch;
+
+  const mySearchBar({required this.onSearch, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class mySearchBar extends StatelessWidget {
       height: 55,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: kcontentColor,
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(30),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
@@ -23,17 +23,15 @@ class mySearchBar extends StatelessWidget {
             size: 30,
           ),
           const SizedBox(width: 10),
-          const Flexible(
-            flex: 4,
+          Expanded(
             child: TextField(
-              decoration: InputDecoration(
+              onChanged: (value) {
+                // Call the onSearch function whenever the user types something
+                onSearch(value);
+              },
+              decoration: const InputDecoration(
                   hintText: "Search...", border: InputBorder.none),
             ),
-          ),
-          Container(
-            height: 25,
-            width: 1.5,
-            color: Colors.grey,
           ),
           IconButton(
             onPressed: () {},

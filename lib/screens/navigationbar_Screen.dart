@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/productgrid/product_grid_view.dart';
 import 'package:ecommerceapp/screens/Home/Homepage.dart';
 import 'package:ecommerceapp/screens/Profile/profile.dart';
 import 'package:ecommerceapp/screens/cart/Cart_screen.dart';
@@ -16,7 +17,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 2;
   List screens = const [
-    Scaffold(),
+    ProductGridView(),
     FavouriteScreen(),
     HomePage(),
     CartScreen(),
