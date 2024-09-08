@@ -12,19 +12,19 @@ class ProductGridView extends StatefulWidget {
 
 class _ProductGridViewState extends State<ProductGridView> {
   int currentSlider = 0;
-  int selectedIndex = 0;
+
+  // Combine all categories into one list to show all products
+  List<Product> allProducts = [
+    ...all, // All products
+    ...shoes, // Shoes
+    ...beauty, // Beauty
+    ...womenFashion, // Women's Fashion
+    ...jewelry, // Jewelry
+    ...menFashion // Men's Fashion
+  ];
 
   @override
   Widget build(BuildContext context) {
-    List<List<Product>> selectedCategories = [
-      all,
-      shoes,
-      beauty,
-      womenFashion,
-      jewelry,
-      menFashion
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,35 +39,41 @@ class _ProductGridViewState extends State<ProductGridView> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          // Wrap in SingleChildScrollView for scrolling
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Products",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                ],
-              ),
-              GridView.builder(
-                physics:
-                    NeverScrollableScrollPhysics(), // Prevent inner scrolling
-                shrinkWrap: true, // Let GridView take only the space it needs
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  childAspectRatio: 1.7,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
+              // Header Text
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 10.0),
+                child: Text(
+                  "Explore All Products",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                itemCount: selectedCategories[selectedIndex].length,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: selectedCategories[selectedIndex][index],
-                  );
-                },
+              ),
+
+              // Displaying the Products Grid
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                  physics:
+                      NeverScrollableScrollPhysics(), // Disable inner scrolling
+                  shrinkWrap: true, // Take up only required space
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1, // Two products per row
+                    childAspectRatio: 1.5, // Aspect ratio to control card size
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  itemCount:
+                      allProducts.length, // Total products from all categories
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      product: allProducts[
+                          index], // Access product from combined list
+                    );
+                  },
+                ),
               ),
             ],
           ),

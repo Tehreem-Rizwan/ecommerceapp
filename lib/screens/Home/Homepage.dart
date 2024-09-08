@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/models/category.dart';
 import 'package:ecommerceapp/models/product_model.dart';
+import 'package:ecommerceapp/productgrid/product_grid_view.dart';
 import 'package:ecommerceapp/screens/Home/widget/Searchbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/home_appbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/image_slider.dart';
@@ -129,10 +130,21 @@ class _HomePageState extends State<HomePage> {
                     "Special For You",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
                   ),
-                  Text(
-                    "See all",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductGridView()));
+                    },
+                    child: Text(
+                      "See all",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                  )
                 ],
               ),
               GridView.builder(
