@@ -1,3 +1,5 @@
+import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Add Firebase Auth
 import 'package:ecommerceapp/components/UIHelper.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
 import 'package:ecommerceapp/screens/loginScreen/registration.dart';
@@ -14,8 +16,10 @@ class UserLoginScreen extends StatefulWidget {
 class _UserLoginScreenState extends State<UserLoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  // Initialize AuthController
 
+  bool isLoading = false; // To show a loading indicator
+
+  // Function to check the input values
   void checkValues() {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
@@ -23,6 +27,45 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     if (email.isEmpty || password.isEmpty) {
       UIHelper.showAlertDialog(
           context, "Incomplete Data", "Please fill all the fields");
+    } else {
+      logIn(email, password); // Call the login function
+    }
+  }
+
+  // Login Function
+  void logIn(String email, String password) async {
+    setState(() {
+      isLoading = true; // Show loading indicator while logging in
+    });
+
+    try {
+      // Sign in with email and password
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      // On successful login, navigate to HomePage
+      print("Login Successful for user: ${userCredential.user!.email}");
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  BottomNavBar())); // Replace with your homepage route
+    } on FirebaseAuthException catch (e) {
+      // Show specific error messages
+      if (e.code == 'user-not-found') {
+        UIHelper.showAlertDialog(
+            context, "Error", "No user found for that email.");
+      } else if (e.code == 'wrong-password') {
+        UIHelper.showAlertDialog(
+            context, "Error", "Incorrect password provided.");
+      } else {
+        UIHelper.showAlertDialog(context, "Error", e.message!);
+      }
+    } finally {
+      setState(() {
+        isLoading = false; // Hide loading indicator after login attempt
+      });
     }
   }
 
@@ -61,14 +104,19 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     obscureText: true,
                   ),
                   const SizedBox(height: 30),
-                  CupertinoButton(
-                    onPressed: checkValues,
-                    color: Colors.pink,
-                    child: Text(
-                      "Log In",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
+
+                  // Show loading indicator while logging in
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : CupertinoButton(
+                          onPressed: checkValues,
+                          color: Colors.pink,
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+
                   SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

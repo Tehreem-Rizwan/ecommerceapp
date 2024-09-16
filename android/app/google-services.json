@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "668768674791",
-    "project_id": "gothic-avenue-417610",
-    "storage_bucket": "gothic-avenue-417610.appspot.com"
+    "project_number": "313393556956",
+    "project_id": "wsecure",
+    "storage_bucket": "wsecure.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668768674791:android:086bafaf5e268cfcfed342",
+        "mobilesdk_app_id": "1:313393556956:android:5e41a06f66aed0ed54b319",
         "android_client_info": {
-          "package_name": "com.example.doctorsapp"
+          "package_name": "com.example.attendance_management_system"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBGRSM-Us-kthLfz4yBSvetH-wBa-o7klk"
+          "current_key": "AIzaSyBuNMrBEr-QAGYdpkVf-wL3ehw0nULKKLk"
         }
       ],
       "services": {
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668768674791:android:372504fc6590af6afed342",
+        "mobilesdk_app_id": "1:313393556956:android:bffee7cff81f4add54b319",
         "android_client_info": {
           "package_name": "com.example.ecommerceapp"
         }
@@ -34,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBGRSM-Us-kthLfz4yBSvetH-wBa-o7klk"
+          "current_key": "AIzaSyBuNMrBEr-QAGYdpkVf-wL3ehw0nULKKLk"
         }
       ],
       "services": {

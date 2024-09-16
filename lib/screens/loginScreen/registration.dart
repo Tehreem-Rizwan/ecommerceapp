@@ -1,6 +1,6 @@
 import 'package:ecommerceapp/components/UIHelper.dart';
-import 'package:ecommerceapp/screens/Home/Homepage.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
+import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -69,7 +69,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return HomePage();
+            return BottomNavBar();
           },
         ),
       );

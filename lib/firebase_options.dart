@@ -41,46 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyChIIlitoaT4ChovEaB6MxevqSplXstdEg',
-    appId: '1:668768674791:web:0c83925dc3547192fed342',
-    messagingSenderId: '668768674791',
-    projectId: 'gothic-avenue-417610',
-    authDomain: 'gothic-avenue-417610.firebaseapp.com',
-    storageBucket: 'gothic-avenue-417610.appspot.com',
+    apiKey: 'AIzaSyCJBzNy-uNhiCVTjZ-hCFxtuRgx2Aw0rqE',
+    appId: '1:313393556956:web:5311aef3a99af76854b319',
+    messagingSenderId: '313393556956',
+    projectId: 'wsecure',
+    authDomain: 'w-52931.firebaseapp.com',
+    storageBucket: 'wsecure.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBGRSM-Us-kthLfz4yBSvetH-wBa-o7klk',
-    appId: '1:668768674791:android:372504fc6590af6afed342',
-    messagingSenderId: '668768674791',
-    projectId: 'gothic-avenue-417610',
-    storageBucket: 'gothic-avenue-417610.appspot.com',
+    apiKey: 'AIzaSyBuNMrBEr-QAGYdpkVf-wL3ehw0nULKKLk',
+    appId: '1:313393556956:android:bffee7cff81f4add54b319',
+    messagingSenderId: '313393556956',
+    projectId: 'wsecure',
+    storageBucket: 'wsecure.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDP792CG_f6DcficIZrbSjCddUd4l_9mSg',
-    appId: '1:668768674791:ios:c10722102ed6ffa6fed342',
-    messagingSenderId: '668768674791',
-    projectId: 'gothic-avenue-417610',
-    storageBucket: 'gothic-avenue-417610.appspot.com',
+    apiKey: 'AIzaSyB0YEP7N6iItWvdxyad9sFSkmo4HnFUjlI',
+    appId: '1:313393556956:ios:2861211da10ae44254b319',
+    messagingSenderId: '313393556956',
+    projectId: 'wsecure',
+    storageBucket: 'wsecure.appspot.com',
     iosBundleId: 'com.example.ecommerceapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDP792CG_f6DcficIZrbSjCddUd4l_9mSg',
-    appId: '1:668768674791:ios:c10722102ed6ffa6fed342',
-    messagingSenderId: '668768674791',
-    projectId: 'gothic-avenue-417610',
-    storageBucket: 'gothic-avenue-417610.appspot.com',
+    apiKey: 'AIzaSyB0YEP7N6iItWvdxyad9sFSkmo4HnFUjlI',
+    appId: '1:313393556956:ios:2861211da10ae44254b319',
+    messagingSenderId: '313393556956',
+    projectId: 'wsecure',
+    storageBucket: 'wsecure.appspot.com',
     iosBundleId: 'com.example.ecommerceapp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyChIIlitoaT4ChovEaB6MxevqSplXstdEg',
-    appId: '1:668768674791:web:cb9725985de78e88fed342',
-    messagingSenderId: '668768674791',
-    projectId: 'gothic-avenue-417610',
-    authDomain: 'gothic-avenue-417610.firebaseapp.com',
-    storageBucket: 'gothic-avenue-417610.appspot.com',
+    apiKey: 'AIzaSyCJBzNy-uNhiCVTjZ-hCFxtuRgx2Aw0rqE',
+    appId: '1:313393556956:web:68a687685925c05854b319',
+    messagingSenderId: '313393556956',
+    projectId: 'wsecure',
+    authDomain: 'w-52931.firebaseapp.com',
+    storageBucket: 'wsecure.appspot.com',
   );
+
 }
