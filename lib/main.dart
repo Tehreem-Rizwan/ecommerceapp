@@ -2,6 +2,7 @@ import 'package:ecommerceapp/firebase_options.dart';
 import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:ecommerceapp/provider/favorite_provider.dart';
 import 'package:ecommerceapp/screens/landing_screen.dart';
+import 'package:ecommerceapp/screens/layout_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,5 +37,5 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => FavoriteProvider())
           ],
           child: MaterialApp(
-              debugShowCheckedModeBanner: false, home: LandingScreen()));
+              debugShowCheckedModeBanner: false, home: LayoutScreen()));
 }
