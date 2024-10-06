@@ -1,6 +1,10 @@
 import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:ecommerceapp/provider/favorite_provider.dart';
 import 'package:ecommerceapp/screens/layout_screen.dart';
+import 'package:ecommerceapp/screens/webSide/add_product.dart';
+import 'package:ecommerceapp/screens/webSide/dashboard_screen.dart';
+import 'package:ecommerceapp/screens/webSide/delete_product.dart';
+import 'package:ecommerceapp/screens/webSide/update_product.dart';
 import 'package:ecommerceapp/screens/webSide/web_login.dart';
 import 'package:ecommerceapp/screens/webSide/web_main.dart';
 import 'package:flutter/foundation.dart';
@@ -40,8 +44,11 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: LayoutScreen(),
             routes: {
-              WebLoginScreen.id: (context) => WebLoginScreen(),
-              WebMainScreen.id: (context) => WebMainScreen()
+              WebMainScreen.id: (context) => WebMainScreen(),
+              AddProductScreen.id: (context) => AddProductScreen(),
+              UpdateProductScreen.id: (context) => UpdateProductScreen(),
+              DeleteProductScreen.id: (context) => DeleteProductScreen(),
+              DashBoardScreen.id: (context) => DashBoardScreen()
             },
           ));
 }
