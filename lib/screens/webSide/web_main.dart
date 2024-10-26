@@ -15,67 +15,79 @@ class WebMainScreen extends StatefulWidget {
 }
 
 class _WebMainScreenState extends State<WebMainScreen> {
-  // const WebMainScreen({super.key});
   Widget selectedScreen = DashBoardScreen();
 
-  chooseScreen(item) {
-    switch (item.routes) {
+  // Handle nullable route
+  void chooseScreen(String? route) {
+    switch (route) {
       case DashBoardScreen.id:
         setState(() {
           selectedScreen = DashBoardScreen();
         });
+        break;
       case AddProductScreen.id:
         setState(() {
           selectedScreen = AddProductScreen();
         });
+        break;
       case UpdateProductScreen.id:
         setState(() {
           selectedScreen = UpdateProductScreen();
         });
+        break;
       case DeleteProductScreen.id:
         setState(() {
           selectedScreen = DeleteProductScreen();
         });
-
         break;
       default:
+        setState(() {
+          selectedScreen = DashBoardScreen(); // Default to dashboard
+        });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
-        appBar: AppBar(
-          backgroundColor: kprimaryColor,
-          title: Text(
-            "Admin",
-            style: TextStyle(color: Colors.white),
-          ),
+      appBar: AppBar(
+        backgroundColor: kprimaryColor,
+        title: Text(
+          "Admin",
+          style: TextStyle(color: Colors.white),
         ),
-        sideBar: SideBar(
-            onSelected: (item) {
-              chooseScreen(item.route);
-            },
-            items: [
-              AdminMenuItem(
-                  title: "DASHBOARD",
-                  icon: Icons.dashboard,
-                  route: DashBoardScreen.id),
-              AdminMenuItem(
-                  title: "ADD PRODUCTS",
-                  icon: Icons.add,
-                  route: AddProductScreen.id),
-              AdminMenuItem(
-                  title: "UPDATE PRODUCTS",
-                  icon: Icons.update,
-                  route: UpdateProductScreen.id),
-              AdminMenuItem(
-                  title: "DELETE PRODUCTS",
-                  icon: Icons.delete,
-                  route: DeleteProductScreen.id),
-              AdminMenuItem(title: "CART ITEMS", icon: Icons.shop_2_outlined),
-            ],
-            selectedRoute: WebMainScreen.id),
-        body: selectedScreen);
+        iconTheme: IconThemeData(
+          color:
+              Colors.white, // This will change the drawer icon color to white
+        ),
+      ),
+      sideBar: SideBar(
+        onSelected: (item) {
+          chooseScreen(item.route ??
+              DashBoardScreen.id); // Handle nullable route with fallback
+        },
+        items: [
+          AdminMenuItem(
+              title: "DASHBOARD",
+              icon: Icons.dashboard,
+              route: DashBoardScreen.id),
+          AdminMenuItem(
+              title: "ADD PRODUCTS",
+              icon: Icons.add,
+              route: AddProductScreen.id),
+          AdminMenuItem(
+              title: "UPDATE PRODUCTS",
+              icon: Icons.update,
+              route: UpdateProductScreen.id),
+          AdminMenuItem(
+              title: "DELETE PRODUCTS",
+              icon: Icons.delete,
+              route: DeleteProductScreen.id),
+          AdminMenuItem(title: "CART ITEMS", icon: Icons.shop_2_outlined),
+        ],
+        selectedRoute: WebMainScreen.id,
+      ),
+      body: selectedScreen,
+    );
   }
 }

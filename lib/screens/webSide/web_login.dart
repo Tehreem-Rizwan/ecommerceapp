@@ -1,9 +1,7 @@
-import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:ecommerceapp/screens/webSide/web_main.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Add Firebase Auth
+import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth import
 import 'package:ecommerceapp/components/UIHelper.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
-import 'package:ecommerceapp/screens/loginScreen/registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +17,23 @@ class _WebLoginScreenState extends State<WebLoginScreen> {
   final passwordController = TextEditingController();
 
   bool isLoading = false; // To show a loading indicator
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(); // Check if user is already logged in
+  }
+
+  // Function to check login status
+  void checkLoginStatus() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser != null) {
+      // User is already logged in, navigate to WebMainScreen
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => WebMainScreen()));
+    }
+  }
 
   // Function to check the input values
   void checkValues() {
@@ -47,11 +62,8 @@ class _WebLoginScreenState extends State<WebLoginScreen> {
       // On successful login, navigate to HomePage
       print("Login Successful for user: ${userCredential.user!.email}");
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  WebMainScreen())); // Replace with your homepage route
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => WebMainScreen()));
     } on FirebaseAuthException catch (e) {
       // Show specific error messages
       if (e.code == 'user-not-found') {
