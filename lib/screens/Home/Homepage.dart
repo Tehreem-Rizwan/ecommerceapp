@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<List<Product>> selectedCategories = [
-      filteredProducts, // Show the filtered products based on search
+      filteredProducts,
       shoes,
       beauty,
       womenFashion,
