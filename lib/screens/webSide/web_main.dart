@@ -57,14 +57,12 @@ class _WebMainScreenState extends State<WebMainScreen> {
           style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(
-          color:
-              Colors.white, // This will change the drawer icon color to white
+          color: ksecondaryColor,
         ),
       ),
       sideBar: SideBar(
         onSelected: (item) {
-          chooseScreen(item.route ??
-              DashBoardScreen.id); // Handle nullable route with fallback
+          chooseScreen(item.route ?? DashBoardScreen.id);
         },
         items: [
           AdminMenuItem(

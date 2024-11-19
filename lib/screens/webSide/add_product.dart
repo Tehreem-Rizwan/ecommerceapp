@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -13,6 +14,8 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  bool isSaving = false;
+  bool isUploading = false;
   String? selectedvalue;
   final imagePicker = ImagePicker();
   List<XFile> images = [];
@@ -101,18 +104,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
             ),
             SizedBox(height: 20),
+            // UPLOAD IMAGES Button
             Center(
               child: SizedBox(
                 width: 600,
                 height: 50,
                 child: ElevatedButton(
-                  child: Text(
-                    "UPLOAD IMAGES",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    uploadImages();
-                  },
+                  child: isUploading
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text(
+                          "UPLOAD IMAGES",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                  onPressed: isUploading ? null : () => uploadImages(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kprimaryColor,
                     shape: RoundedRectangleBorder(
@@ -166,10 +172,56 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
               ),
             ),
+            TextFormField(),
+            TextFormField(),
+            TextFormField(),
+            TextFormField(),
+            TextFormField(),
+
+// Save Button
+            Center(
+              child: SizedBox(
+                width: 600,
+                height: 50,
+                child: ElevatedButton(
+                  child: isSaving
+                      ? CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                  onPressed: isSaving ? null : () => save(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kprimaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  save() async {
+    setState(() {
+      isSaving = true;
+    });
+    await uploadImages();
+    await FirebaseFirestore.instance
+        .collection('products')
+        .add({"images": imageUrls}).whenComplete(() {
+      setState(() {
+        isSaving = false;
+        images.clear();
+        imageUrls.clear();
+      });
+    });
   }
 
   pickImage() async {
@@ -184,6 +236,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Future postImages(XFile? imageFile) async {
+    setState(() {
+      isUploading = true;
+    });
     String? urls;
     Reference ref =
         FirebaseStorage.instance.ref().child("images").child(imageFile!.name);
@@ -192,6 +247,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
       await ref.putData(await imageFile.readAsBytes(),
           SettableMetadata(contentType: "image/jpeg"));
       urls = await ref.getDownloadURL();
+      setState(() {
+        isUploading = false;
+      });
       return urls;
     }
   }
