@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,19 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  final emailController = TextEditingController();
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final imageController = TextEditingController();
+  final reviewController = TextEditingController();
+  final sellerController = TextEditingController();
+  final priceController = TextEditingController();
+  final colorController = TextEditingController();
+
+  final categoryController = TextEditingController();
+  final rateController = TextEditingController();
+
   bool isSaving = false;
   bool isUploading = false;
   String? selectedvalue;
@@ -80,6 +94,54 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
+            ),
+            SizedBox(height: 70),
+
+            MyTextfield(
+              controller: titleController,
+              hintText: "Enter title",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: descriptionController,
+              hintText: "Enter description",
+              obscureText: false,
+              maxLines: 5,
+            ),
+            MyTextfield(
+              controller: imageController,
+              hintText: "Upload Image",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: reviewController,
+              hintText: "Enter reviews",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: sellerController,
+              hintText: "Enter seller",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: priceController,
+              hintText: "Enter price",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: colorController,
+              hintText: "Enter color",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: categoryController,
+              hintText: "Enter category",
+              obscureText: false,
+            ),
+            MyTextfield(
+              controller: rateController,
+              hintText: "Enter rate",
+              obscureText: false,
             ),
             SizedBox(height: 70),
             Center(
@@ -172,11 +234,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
               ),
             ),
-            TextFormField(),
-            TextFormField(),
-            TextFormField(),
-            TextFormField(),
-            TextFormField(),
 
 // Save Button
             Center(
