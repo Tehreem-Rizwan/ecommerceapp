@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/models/product_model.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -24,7 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final sellerController = TextEditingController();
   final priceController = TextEditingController();
   final colorController = TextEditingController();
-
+  final quantityController = TextEditingController();
   final categoryController = TextEditingController();
   final rateController = TextEditingController();
 
@@ -69,7 +70,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
             SizedBox(height: 20),
             Form(
-              // Wrap Dropdown in Form
               child: DropdownButtonFormField<String>(
                 validator: (value) {
                   if (value == null) {
@@ -102,42 +102,51 @@ class _AddProductScreenState extends State<AddProductScreen> {
               hintText: "Enter title",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: descriptionController,
               hintText: "Enter description",
               obscureText: false,
               maxLines: 5,
             ),
-            MyTextfield(
-              controller: imageController,
-              hintText: "Upload Image",
-              obscureText: false,
-            ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: reviewController,
               hintText: "Enter reviews",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: sellerController,
               hintText: "Enter seller",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: priceController,
               hintText: "Enter price",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: colorController,
               hintText: "Enter color",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: categoryController,
               hintText: "Enter category",
               obscureText: false,
             ),
+            SizedBox(height: 10),
+
             MyTextfield(
               controller: rateController,
               hintText: "Enter rate",
@@ -234,6 +243,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
               ),
             ),
+            SizedBox(height: 20),
 
 // Save Button
             Center(
@@ -269,17 +279,43 @@ class _AddProductScreenState extends State<AddProductScreen> {
     setState(() {
       isSaving = true;
     });
-    await uploadImages();
-    await FirebaseFirestore.instance
-        .collection('products')
-        .add({"images": imageUrls}).whenComplete(() {
+
+    try {
+      await uploadImages(); // Ensure this works as expected
+      await Product.addProducts(Product(
+        title: titleController.text,
+        review: reviewController.text,
+        description: descriptionController.text,
+        image: imageController.text,
+        price: int.parse(priceController.text),
+        colors: [Colors.red, Colors.blue, Colors.green],
+        seller: sellerController.text,
+        category: categoryController.text,
+        rate: double.parse(rateController.text),
+        quantity: int.parse(quantityController.text),
+      ));
+      // Show success message if needed
+      print("Product saved successfully!");
+    } catch (e) {
+      // Handle errors gracefully
+      print("Error occurred: $e");
+    } finally {
+      // Ensure isSaving is reset even if an error occurs
       setState(() {
         isSaving = false;
-        images.clear();
-        imageUrls.clear();
       });
-    });
+    }
   }
+
+  // await FirebaseFirestore.instance
+  //     .collection('products')
+  //     .add({"images": imageUrls}).whenComplete(() {
+  //   setState(() {
+  //     isSaving = false;
+  //     images.clear();
+  //     imageUrls.clear();
+  //   });
+  // });
 
   pickImage() async {
     final List<XFile>? pickImage = await imagePicker.pickMultiImage();

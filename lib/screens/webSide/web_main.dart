@@ -53,8 +53,12 @@ class _WebMainScreenState extends State<WebMainScreen> {
       appBar: AppBar(
         backgroundColor: kprimaryColor,
         title: Text(
-          "Admin",
-          style: TextStyle(color: Colors.white),
+          "Admin Panel",
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              letterSpacing: 1),
         ),
         iconTheme: IconThemeData(
           color: ksecondaryColor,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Product {
@@ -6,7 +7,7 @@ class Product {
   final String image;
   final String review;
   final String seller;
-  final double price;
+  final int price;
   final List<Color> colors;
   final String category;
   final double rate;
@@ -23,6 +24,51 @@ class Product {
       required this.category,
       required this.rate,
       required this.quantity});
+  static Future<void> addProducts(Product products) async {
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+
+    Map<String, dynamic> data = {
+      "title": products.title,
+      "description": products.description,
+      "image": products.image,
+      "review": products.review,
+      "seller": products.seller,
+      "price": products.price,
+      "colors": products.colors
+          .map((color) => color.value)
+          .toList(), // Convert colors to int values
+      "category": products.category,
+      "rate": products.rate,
+      "quantity": products.quantity,
+    };
+    await db.add(data);
+  }
+
+  Future<void> updateProducts(String id, Product updateProducts) async {
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+
+    Map<String, dynamic> data = {
+      "title": updateProducts.title,
+      "description": updateProducts.description,
+      "image": updateProducts.image,
+      "review": updateProducts.review,
+      "seller": updateProducts.seller,
+      "price": updateProducts.price,
+      "colors": updateProducts.colors
+          .map((color) => color.value)
+          .toList(), // Convert colors to int values
+      "category": updateProducts.category,
+      "rate": updateProducts.rate,
+      "quantity": updateProducts.quantity,
+    };
+    await db.doc(id).update(data);
+  }
+
+  Future<void> deleteProducts(String id) async {
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+
+    await db.doc(id).delete();
+  }
 }
 
 final List<Product> all = [
