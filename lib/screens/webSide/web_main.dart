@@ -65,6 +65,8 @@ class _WebMainScreenState extends State<WebMainScreen> {
         ),
       ),
       sideBar: SideBar(
+        backgroundColor: kprimaryColor,
+        textStyle: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
         onSelected: (item) {
           chooseScreen(item.route ?? DashBoardScreen.id);
         },

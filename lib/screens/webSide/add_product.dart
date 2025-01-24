@@ -59,217 +59,223 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                "ADD PRODUCT",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(height: 20),
-            Form(
-              child: DropdownButtonFormField<String>(
-                validator: (value) {
-                  if (value == null) {
-                    return "Category must be selected";
-                  }
-                  return null;
-                },
-                value: selectedvalue,
-                items: categoryNames
-                    .map((e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(e),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedvalue = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  labelText: "Select Category",
-                  border: OutlineInputBorder(),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
+                  "ADD PRODUCT",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
               ),
-            ),
-            SizedBox(height: 70),
-
-            MyTextfield(
-              controller: titleController,
-              hintText: "Enter title",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: descriptionController,
-              hintText: "Enter description",
-              obscureText: false,
-              maxLines: 5,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: reviewController,
-              hintText: "Enter reviews",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: sellerController,
-              hintText: "Enter seller",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: priceController,
-              hintText: "Enter price",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: colorController,
-              hintText: "Enter color",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: categoryController,
-              hintText: "Enter category",
-              obscureText: false,
-            ),
-            SizedBox(height: 10),
-
-            MyTextfield(
-              controller: rateController,
-              hintText: "Enter rate",
-              obscureText: false,
-            ),
-            SizedBox(height: 70),
-            Center(
-              child: SizedBox(
-                width: 600,
-                height: 50,
-                child: ElevatedButton(
-                  child: Text(
-                    "PICK IMAGES",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    pickImage();
+              SizedBox(height: 20),
+              Form(
+                child: DropdownButtonFormField<String>(
+                  validator: (value) {
+                    if (value == null) {
+                      return "Category must be selected";
+                    }
+                    return null;
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kprimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                  value: selectedvalue,
+                  items: categoryNames
+                      .map((e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(e),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedvalue = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: "Select Category",
+                    border: OutlineInputBorder(),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            // UPLOAD IMAGES Button
-            Center(
-              child: SizedBox(
-                width: 600,
-                height: 50,
-                child: ElevatedButton(
-                  child: isUploading
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : Text(
-                          "UPLOAD IMAGES",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                  onPressed: isUploading ? null : () => uploadImages(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kprimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
-                ),
-                itemCount: images.length, // Change to imageUrls.length
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                          ),
-                          child: Image.network(
-                            File(images[index].path).path,
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              images.removeAt(index);
-                              imageUrls.removeAt(
-                                  index); // Also remove from imageUrls
-                            });
-                          },
-                          icon: Icon(Icons.cancel_outlined),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 20),
+              SizedBox(height: 70),
 
-// Save Button
-            Center(
-              child: SizedBox(
-                width: 600,
-                height: 50,
-                child: ElevatedButton(
-                  child: isSaving
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : Text(
-                          "Save",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                  onPressed: isSaving ? null : () => save(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: kprimaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              MyTextfield(
+                controller: titleController,
+                hintText: "Enter title",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: descriptionController,
+                hintText: "Enter description",
+                obscureText: false,
+                maxLines: 5,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: reviewController,
+                hintText: "Enter reviews",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: sellerController,
+                hintText: "Enter seller",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: priceController,
+                hintText: "Enter price",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: colorController,
+                hintText: "Enter color",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: categoryController,
+                hintText: "Enter category",
+                obscureText: false,
+              ),
+              SizedBox(height: 10),
+
+              MyTextfield(
+                controller: rateController,
+                hintText: "Enter rate",
+                obscureText: false,
+              ),
+              SizedBox(height: 70),
+              Center(
+                child: SizedBox(
+                  width: 600,
+                  height: 50,
+                  child: ElevatedButton(
+                    child: Text(
+                      "PICK IMAGES",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      pickImage();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kprimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              // UPLOAD IMAGES Button
+              Center(
+                child: SizedBox(
+                  width: 600,
+                  height: 50,
+                  child: ElevatedButton(
+                    child: isUploading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "UPLOAD IMAGES",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                    onPressed: isUploading ? null : () => uploadImages(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kprimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                  ),
+                  itemCount: images.length, // Change to imageUrls.length
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: Image.network(
+                              File(images[index].path).path,
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                images.removeAt(index);
+                                imageUrls.removeAt(
+                                    index); // Also remove from imageUrls
+                              });
+                            },
+                            icon: Icon(Icons.cancel_outlined),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+
+              // Save Button
+              Center(
+                child: SizedBox(
+                  width: 600,
+                  height: 50,
+                  child: ElevatedButton(
+                    child: isSaving
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Save",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                    onPressed: isSaving ? null : () => save(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kprimaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -303,6 +309,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
       // Ensure isSaving is reset even if an error occurs
       setState(() {
         isSaving = false;
+        imageUrls.clear();
+        images.clear();
+        clearFields();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("ADDED SUCCESSFULLY")));
       });
     }
   }
@@ -316,6 +327,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
   //     imageUrls.clear();
   //   });
   // });
+  clearFields() {
+    setState(() {
+      selectedvalue = "";
+      titleController.clear();
+    });
+  }
 
   pickImage() async {
     final List<XFile>? pickImage = await imagePicker.pickMultiImage();
