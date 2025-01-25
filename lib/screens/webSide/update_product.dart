@@ -27,50 +27,59 @@ class UpdateProductScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              StreamBuilder(
+              StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection("products")
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
                     }
-                    if (snapshot.data == null) {
+                    if (snapshot.hasError) {
+                      return const Center(child: Text("Something went wrong"));
+                    }
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                       return Center(child: Text("No Data Exists"));
                     }
                     final data = snapshot.data!.docs;
                     return Expanded(
                       child: ListView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Container(
-                                color: kprimaryColor,
-                                // Colors.primaries[Random().nextInt(data.length)],
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.to(() => UpdateCompeleteScreen.id);
-                                    },
-                                    child: ListTile(
-                                      title: Text(
-                                        data[index]['title'],
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      trailing: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(Icons.edit,
-                                              color: Colors.white)),
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final product = data[index];
+                          final title =
+                              product['title']; // Access the title field safely
+
+                          return Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Container(
+                              color: kprimaryColor,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => UpdateCompeleteScreen.id);
+                                  },
+                                  child: ListTile(
+                                    title: Text(
+                                      title ?? "No Title",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    trailing: IconButton(
+                                      onPressed: () {},
+                                      icon:
+                                          Icon(Icons.edit, color: Colors.white),
                                     ),
                                   ),
                                 ),
                               ),
-                            );
-                          }),
+                            ),
+                          );
+                        },
+                      ),
                     );
+                    ;
                   })
             ],
           ),
