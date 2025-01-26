@@ -4,12 +4,12 @@ import 'package:ecommerceapp/screens/layout_screen.dart';
 import 'package:ecommerceapp/screens/webSide/add_product.dart';
 import 'package:ecommerceapp/screens/webSide/dashboard_screen.dart';
 import 'package:ecommerceapp/screens/webSide/delete_product.dart';
-import 'package:ecommerceapp/screens/webSide/udpate_complete_screen.dart';
 import 'package:ecommerceapp/screens/webSide/update_product.dart';
 import 'package:ecommerceapp/screens/webSide/web_main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => CartProvider()),
             ChangeNotifierProvider(create: (_) => FavoriteProvider())
           ],
-          child: MaterialApp(
+          child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
             home: LayoutScreen(),
             routes: {
@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
               UpdateProductScreen.id: (context) => UpdateProductScreen(),
               DeleteProductScreen.id: (context) => DeleteProductScreen(),
               DashBoardScreen.id: (context) => DashBoardScreen(),
-              UpdateCompeleteScreen.id: (context) => UpdateCompeleteScreen()
             },
           ));
 }

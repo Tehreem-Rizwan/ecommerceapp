@@ -189,7 +189,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             Text(
               "Selected Images:",
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
