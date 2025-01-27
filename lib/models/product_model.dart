@@ -8,22 +8,25 @@ class Product {
   final String review;
   final String seller;
   final int price;
-  final List<Color> colors;
+  final List<Color> colors; // Use List<Color> for color handling
+
   final String category;
   final double rate;
   int quantity;
 
-  Product(
-      {required this.title,
-      required this.review,
-      required this.description,
-      required this.image,
-      required this.price,
-      required this.colors,
-      required this.seller,
-      required this.category,
-      required this.rate,
-      required this.quantity});
+  Product({
+    required this.title,
+    required this.review,
+    required this.description,
+    required this.image,
+    required this.price,
+    required this.colors,
+    required this.seller,
+    required this.category,
+    required this.rate,
+    required this.quantity,
+  });
+
   static Future<void> addProducts(Product products) async {
     CollectionReference db = FirebaseFirestore.instance.collection("products");
 
@@ -35,8 +38,8 @@ class Product {
       "seller": products.seller,
       "price": products.price,
       "colors": products.colors
-          .map((color) => color.value)
-          .toList(), // Convert colors to int values
+          .map((color) => color.value) // Convert Color to int (ARGB value)
+          .toList(),
       "category": products.category,
       "rate": products.rate,
       "quantity": products.quantity,
@@ -55,8 +58,8 @@ class Product {
       "seller": updateProducts.seller,
       "price": updateProducts.price,
       "colors": updateProducts.colors
-          .map((color) => color.value)
-          .toList(), // Convert colors to int values
+          .map((color) => color.value) // Convert Color to int (ARGB value)
+          .toList(),
       "category": updateProducts.category,
       "rate": updateProducts.rate,
       "quantity": updateProducts.quantity,

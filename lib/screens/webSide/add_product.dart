@@ -17,7 +17,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final priceController = TextEditingController();
   final rateController = TextEditingController();
   final quantityController = TextEditingController();
-
+  final reviewController = TextEditingController();
   List<XFile> images = [];
   List<String> imageUrls = [];
   bool isUploading = false;
@@ -55,6 +55,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         priceController.text.isEmpty ||
         rateController.text.isEmpty ||
         quantityController.text.isEmpty ||
+        reviewController.text.isEmpty ||
         selectedCategory == 'Filter Products' ||
         images.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -72,6 +73,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       // Create a new product document
+
       DocumentReference productRef =
           await firestore.collection('products').add({
         'title': titleController.text,
@@ -182,6 +184,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "Quantity",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: reviewController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: "Reviews",
                 border: OutlineInputBorder(),
               ),
             ),

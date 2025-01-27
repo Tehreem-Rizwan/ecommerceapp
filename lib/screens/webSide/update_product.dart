@@ -89,25 +89,24 @@ class UpdateProductScreen extends StatelessWidget {
                                             Get.to(() => UpdateCompleteScreen(
                                                   id: data[index].id,
                                                   products: Product(
-                                                      title: data[index]
-                                                          ['title'],
-                                                      review: data[index]
-                                                          ['reviews'],
-                                                      description: data[index]
-                                                          ['Description'],
-                                                      image: data[index]
-                                                          ['images'],
-                                                      price: data[index]
-                                                          ['price'],
-                                                      colors: data[index]
-                                                          ['colors'],
-                                                      seller: data[index]
-                                                          ['seller'],
-                                                      category: data[index]
-                                                          ['category'],
-                                                      rate: data[index]['rate'],
-                                                      quantity: data[index]
-                                                          ['quantity']),
+                                                    title: data[index]['title'],
+                                                    description: data[index]
+                                                        ['description'],
+                                                    image: data[index]
+                                                        ['images'],
+                                                    price: data[index]['price'],
+                                                    colors: data[index]
+                                                        ['colors'],
+                                                    seller: data[index]
+                                                        ['seller'],
+                                                    category: data[index]
+                                                        ['category'],
+                                                    rate: data[index]['rate'],
+                                                    quantity: data[index]
+                                                        ['quantity'],
+                                                    review: data[index]
+                                                        ['reviews'],
+                                                  ),
                                                 ));
                                           },
                                           icon: Icon(Icons.edit,
