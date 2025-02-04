@@ -59,7 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   });
                 },
                 icon: Icon(
-                  Icons.grid_view_outlined,
+                  Icons.store,
                   size: 30,
                   color:
                       currentIndex == 0 ? kprimaryColor : Colors.grey.shade400,
