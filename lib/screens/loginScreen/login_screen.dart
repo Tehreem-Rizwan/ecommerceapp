@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Add Firebase Auth
 import 'package:ecommerceapp/components/UIHelper.dart';
@@ -81,14 +82,9 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/images/ecommerce.png",
-                    color: Colors.pink,
-                    height: 170,
-                  ),
                   SizedBox(height: 50),
                   const Text(
-                    "Welcome Back, you have been missed!!",
+                    "Welcome to the Clothing Store",
                     style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(height: 50),
@@ -103,14 +99,15 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     hintText: "Password",
                     obscureText: true,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
 
                   // Show loading indicator while logging in
                   isLoading
                       ? CircularProgressIndicator()
                       : CupertinoButton(
                           onPressed: checkValues,
-                          color: Colors.pink,
+                          color: kprimaryColor,
+                          borderRadius: BorderRadius.zero,
                           child: Text(
                             "Log In",
                             style: TextStyle(color: Colors.white, fontSize: 20),

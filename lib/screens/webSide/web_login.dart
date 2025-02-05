@@ -4,6 +4,7 @@ import 'package:ecommerceapp/components/UIHelper.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerceapp/components/constants.dart';
 
 class WebLoginScreen extends StatefulWidget {
   const WebLoginScreen({super.key});
@@ -115,12 +116,13 @@ class _WebLoginScreenState extends State<WebLoginScreen> {
                     hintText: "Password",
                     obscureText: true,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   isLoading
                       ? CircularProgressIndicator()
                       : CupertinoButton(
                           onPressed: checkValues,
-                          color: Colors.pink,
+                          color: kprimaryColor,
+                          borderRadius: BorderRadius.zero,
                           child: Text(
                             "Log In",
                             style: TextStyle(color: Colors.white, fontSize: 20),

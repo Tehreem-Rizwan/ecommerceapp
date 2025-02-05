@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/components/UIHelper.dart';
+import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,17 +92,18 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/images/ecommerce.png",
-                    color: Colors.pink,
-                    height: 170,
-                  ),
-                  SizedBox(height: 50),
                   const Text(
-                    "Create a new account",
-                    style: TextStyle(fontSize: 18),
+                    "Reistration",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "Sign up for all the news about our last \narrivals and get an exclusive\nearly access shopping.",
+                    style: TextStyle(color: kgreyColor, fontSize: 20),
+                  ),
+                  SizedBox(height: 30),
                   MyTextfield(
                     controller: fullNameController,
                     hintText: "Full Name",
@@ -126,27 +128,11 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     obscureText: true,
                   ),
                   SizedBox(height: 10),
-                  // Role selection dropdown
-                  DropdownButton<String>(
-                    value: selectedRole,
-                    items: roles.map((String role) {
-                      return DropdownMenuItem<String>(
-                        value: role,
-                        child: Text(role),
-                      );
-                    }).toList(),
-                    onChanged: (String? newRole) {
-                      setState(() {
-                        selectedRole = newRole!;
-                      });
-                    },
-                    isExpanded: true,
-                    hint: Text('Select Role'),
-                  ),
                   const SizedBox(height: 30),
                   CupertinoButton(
                     onPressed: checkValues,
-                    color: Colors.pink,
+                    color: kprimaryColor,
+                    borderRadius: BorderRadius.zero,
                     child: Text(
                       "Sign Up",
                       style: TextStyle(color: Colors.white, fontSize: 20),

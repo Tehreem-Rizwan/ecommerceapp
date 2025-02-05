@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/screens/Home/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -11,17 +12,7 @@ class CustomAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          style: IconButton.styleFrom(
-            backgroundColor: kcontentColor,
-            padding: const EdgeInsets.all(15),
-          ),
-          onPressed: () {},
-          icon: Image.asset(
-            "assets/images/icon.png",
-            height: 25,
-          ),
-        ),
+        CustomDrawer(),
         IconButton(
           style: IconButton.styleFrom(
             backgroundColor: kcontentColor,

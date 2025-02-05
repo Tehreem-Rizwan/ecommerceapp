@@ -43,14 +43,10 @@ class LandingScreen extends StatelessWidget {
               }
               return Scaffold(
                 body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text("CHECKING AUTHENTICATION...",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      CircularProgressIndicator(),
-                    ],
+                  child: Image.asset(
+                    "assets/images/logo_clothing.png",
+                    width: 230,
+                    height: 300,
                   ),
                 ),
               );

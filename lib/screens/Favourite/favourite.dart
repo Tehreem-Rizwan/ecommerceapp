@@ -80,7 +80,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                      "\$${cartItems.price}",
+                                      "\€${cartItems.price}",
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
-  
+
   /// Assets for imagesAll
   /// assets/images/all.png
   static const String imagesAll = "assets/images/all.png";
@@ -26,17 +26,14 @@ class Assets {
   /// assets/images/amazon_pay.png
   static const String imagesAmazonPay = "assets/images/amazon_pay.png";
 
-  /// Assets for imagesBarrchl700x143
-  /// assets/images/barrchl-700x143.png
-  static const String imagesBarrchl700x143 = "assets/images/barrchl-700x143.png";
-
   /// Assets for imagesBeauty
   /// assets/images/beauty.png
   static const String imagesBeauty = "assets/images/beauty.png";
 
   /// Assets for imagesBeautyFace care
   /// assets/images/beauty/face care.png
-  static const String imagesBeautyFace care = "assets/images/beauty/face care.png";
+  static const String imagesBeautyFacecare =
+      "assets/images/beauty/face care.png";
 
   /// Assets for imagesBeautyPerfume
   /// assets/images/beauty/perfume.png
@@ -44,7 +41,8 @@ class Assets {
 
   /// Assets for imagesBeautySkinCare
   /// assets/images/beauty/skin-care.jpeg
-  static const String imagesBeautySkinCare = "assets/images/beauty/skin-care.jpeg";
+  static const String imagesBeautySkinCare =
+      "assets/images/beauty/skin-care.jpeg";
 
   /// Assets for imagesEcommerce
   /// assets/images/ecommerce.png
@@ -56,51 +54,63 @@ class Assets {
 
   /// Assets for imagesFashionProduct1
   /// assets/images/fashion-product-1.jpg
-  static const String imagesFashionProduct1 = "assets/images/fashion-product-1.jpg";
+  static const String imagesFashionProduct1 =
+      "assets/images/fashion-product-1.jpg";
 
   /// Assets for imagesFashionProduct10
   /// assets/images/fashion-product-10.jpg
-  static const String imagesFashionProduct10 = "assets/images/fashion-product-10.jpg";
+  static const String imagesFashionProduct10 =
+      "assets/images/fashion-product-10.jpg";
 
   /// Assets for imagesFashionProduct2
   /// assets/images/fashion-product-2.jpg
-  static const String imagesFashionProduct2 = "assets/images/fashion-product-2.jpg";
+  static const String imagesFashionProduct2 =
+      "assets/images/fashion-product-2.jpg";
 
   /// Assets for imagesFashionProduct3
   /// assets/images/fashion-product-3.jpg
-  static const String imagesFashionProduct3 = "assets/images/fashion-product-3.jpg";
+  static const String imagesFashionProduct3 =
+      "assets/images/fashion-product-3.jpg";
 
   /// Assets for imagesFashionProduct4
   /// assets/images/fashion-product-4.jpg
-  static const String imagesFashionProduct4 = "assets/images/fashion-product-4.jpg";
+  static const String imagesFashionProduct4 =
+      "assets/images/fashion-product-4.jpg";
 
   /// Assets for imagesFashionProduct5
   /// assets/images/fashion-product-5.jpg
-  static const String imagesFashionProduct5 = "assets/images/fashion-product-5.jpg";
+  static const String imagesFashionProduct5 =
+      "assets/images/fashion-product-5.jpg";
 
   /// Assets for imagesFashionProduct6
   /// assets/images/fashion-product-6.jpg
-  static const String imagesFashionProduct6 = "assets/images/fashion-product-6.jpg";
+  static const String imagesFashionProduct6 =
+      "assets/images/fashion-product-6.jpg";
 
   /// Assets for imagesFashionProduct62
   /// assets/images/fashion-product-6-2.jpg
-  static const String imagesFashionProduct62 = "assets/images/fashion-product-6-2.jpg";
+  static const String imagesFashionProduct62 =
+      "assets/images/fashion-product-6-2.jpg";
 
   /// Assets for imagesFashionProduct7
   /// assets/images/fashion-product-7.jpg
-  static const String imagesFashionProduct7 = "assets/images/fashion-product-7.jpg";
+  static const String imagesFashionProduct7 =
+      "assets/images/fashion-product-7.jpg";
 
   /// Assets for imagesFashionProduct72
   /// assets/images/fashion-product-7-2.jpg
-  static const String imagesFashionProduct72 = "assets/images/fashion-product-7-2.jpg";
+  static const String imagesFashionProduct72 =
+      "assets/images/fashion-product-7-2.jpg";
 
   /// Assets for imagesFashionProduct8
   /// assets/images/fashion-product-8.jpg
-  static const String imagesFashionProduct8 = "assets/images/fashion-product-8.jpg";
+  static const String imagesFashionProduct8 =
+      "assets/images/fashion-product-8.jpg";
 
   /// Assets for imagesFashionProduct9
   /// assets/images/fashion-product-9.jpg
-  static const String imagesFashionProduct9 = "assets/images/fashion-product-9.jpg";
+  static const String imagesFashionProduct9 =
+      "assets/images/fashion-product-9.jpg";
 
   /// Assets for imagesFashionSlide1
   /// assets/images/fashion-slide-1.jpg
@@ -116,7 +126,8 @@ class Assets {
 
   /// Assets for imagesFashionTestimon1
   /// assets/images/fashion-testimon-1.jpg
-  static const String imagesFashionTestimon1 = "assets/images/fashion-testimon-1.jpg";
+  static const String imagesFashionTestimon1 =
+      "assets/images/fashion-testimon-1.jpg";
 
   /// Assets for imagesIcon
   /// assets/images/icon.png
@@ -136,23 +147,31 @@ class Assets {
 
   /// Assets for imagesJewelleryEarrings
   /// assets/images/jewellery/earrings.png
-  static const String imagesJewelleryEarrings = "assets/images/jewellery/earrings.png";
+  static const String imagesJewelleryEarrings =
+      "assets/images/jewellery/earrings.png";
 
   /// Assets for imagesJewelleryJewelryBox
   /// assets/images/jewellery/jewelry-box.png
-  static const String imagesJewelleryJewelryBox = "assets/images/jewellery/jewelry-box.png";
+  static const String imagesJewelleryJewelryBox =
+      "assets/images/jewellery/jewelry-box.png";
 
   /// Assets for imagesJewelleryNecklaceJewellery
   /// assets/images/jewellery/necklace-jewellery.png
-  static const String imagesJewelleryNecklaceJewellery = "assets/images/jewellery/necklace-jewellery.png";
+  static const String imagesJewelleryNecklaceJewellery =
+      "assets/images/jewellery/necklace-jewellery.png";
 
   /// Assets for imagesJewelleryWedding ring
   /// assets/images/jewellery/wedding ring.png
-  static const String imagesJewelleryWedding ring = "assets/images/jewellery/wedding ring.png";
+  static const String imagesJewelleryWeddingring =
+      "assets/images/jewellery/wedding ring.png";
 
   /// Assets for imagesJewelry
   /// assets/images/jewelry.png
   static const String imagesJewelry = "assets/images/jewelry.png";
+
+  /// Assets for imagesLogoClothing
+  /// assets/images/logo_clothing.png
+  static const String imagesLogoClothing = "assets/images/logo_clothing.png";
 
   /// Assets for imagesMastercard
   /// assets/images/mastercard.png
@@ -164,23 +183,28 @@ class Assets {
 
   /// Assets for imagesMenfashionMan jacket
   /// assets/images/menfashion/man jacket.png
-  static const String imagesMenfashionMan jacket = "assets/images/menfashion/man jacket.png";
+  static const String imagesMenfashionManjacket =
+      "assets/images/menfashion/man jacket.png";
 
   /// Assets for imagesMenfashionPants
   /// assets/images/menfashion/pants.png
-  static const String imagesMenfashionPants = "assets/images/menfashion/pants.png";
+  static const String imagesMenfashionPants =
+      "assets/images/menfashion/pants.png";
 
   /// Assets for imagesMenfashionShert
   /// assets/images/menfashion/shert.png
-  static const String imagesMenfashionShert = "assets/images/menfashion/shert.png";
+  static const String imagesMenfashionShert =
+      "assets/images/menfashion/shert.png";
 
   /// Assets for imagesMenfashionTShirt
   /// assets/images/menfashion/t-shirt.png
-  static const String imagesMenfashionTShirt = "assets/images/menfashion/t-shirt.png";
+  static const String imagesMenfashionTShirt =
+      "assets/images/menfashion/t-shirt.png";
 
   /// Assets for imagesMenfashionWatch
   /// assets/images/menfashion/watch.png
-  static const String imagesMenfashionWatch = "assets/images/menfashion/watch.png";
+  static const String imagesMenfashionWatch =
+      "assets/images/menfashion/watch.png";
 
   /// Assets for imagesPayPal
   /// assets/images/payPal.png
@@ -200,27 +224,33 @@ class Assets {
 
   /// Assets for imagesShoesAir Jordan
   /// assets/images/shoes/Air Jordan.png
-  static const String imagesShoesAir Jordan = "assets/images/shoes/Air Jordan.png";
+  static const String imagesShoesAirJordan =
+      "assets/images/shoes/Air Jordan.png";
 
   /// Assets for imagesShoesNew Balance 990
   /// assets/images/shoes/New Balance 990.png
-  static const String imagesShoesNew Balance 990 = "assets/images/shoes/New Balance 990.png";
+  static const String imagesShoesNewBalance990 =
+      "assets/images/shoes/New Balance 990.png";
 
   /// Assets for imagesShoesSports shoes
   /// assets/images/shoes/sports shoes.png
-  static const String imagesShoesSports shoes = "assets/images/shoes/sports shoes.png";
+  static const String imagesShoesSportsshoes =
+      "assets/images/shoes/sports shoes.png";
 
   /// Assets for imagesShoesVans old skool
   /// assets/images/shoes/vans old skool.png
-  static const String imagesShoesVans old skool = "assets/images/shoes/vans old skool.png";
+  static const String imagesShoesVansoldskool =
+      "assets/images/shoes/vans old skool.png";
 
   /// Assets for imagesShoesWhite sneaker
   /// assets/images/shoes/white sneaker.png
-  static const String imagesShoesWhite sneaker = "assets/images/shoes/white sneaker.png";
+  static const String imagesShoesWhitesneaker =
+      "assets/images/shoes/white sneaker.png";
 
   /// Assets for imagesShoesWomenShoes
   /// assets/images/shoes/women-shoes.png
-  static const String imagesShoesWomenShoes = "assets/images/shoes/women-shoes.png";
+  static const String imagesShoesWomenShoes =
+      "assets/images/shoes/women-shoes.png";
 
   /// Assets for imagesSlider
   /// assets/images/slider.jpg
@@ -252,18 +282,21 @@ class Assets {
 
   /// Assets for imagesWomenfashionKurta
   /// assets/images/womenfashion/kurta.png
-  static const String imagesWomenfashionKurta = "assets/images/womenfashion/kurta.png";
+  static const String imagesWomenfashionKurta =
+      "assets/images/womenfashion/kurta.png";
 
   /// Assets for imagesWomenfashionLehenga
   /// assets/images/womenfashion/lehenga.png
-  static const String imagesWomenfashionLehenga = "assets/images/womenfashion/lehenga.png";
+  static const String imagesWomenfashionLehenga =
+      "assets/images/womenfashion/lehenga.png";
 
   /// Assets for imagesWomenfashionPants
   /// assets/images/womenfashion/pants.png
-  static const String imagesWomenfashionPants = "assets/images/womenfashion/pants.png";
+  static const String imagesWomenfashionPants =
+      "assets/images/womenfashion/pants.png";
 
   /// Assets for imagesWomenfashionTShert
   /// assets/images/womenfashion/t-shert.png
-  static const String imagesWomenfashionTShert = "assets/images/womenfashion/t-shert.png";
+  static const String imagesWomenfashionTShert =
+      "assets/images/womenfashion/t-shert.png";
 }
-
