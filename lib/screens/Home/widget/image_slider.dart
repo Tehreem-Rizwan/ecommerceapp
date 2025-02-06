@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/components/constants.dart';
-import 'package:ecommerceapp/productgrid/product_grid_view.dart';
+import 'package:ecommerceapp/shop/shop_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -93,7 +93,7 @@ class ImageSlider extends StatelessWidget {
                               height: 50, // Set desired height (optional)
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Get.to(() => ProductGridView());
+                                  Get.to(() => ShopScreen());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:

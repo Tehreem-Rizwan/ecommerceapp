@@ -46,7 +46,7 @@ class _DetailScreenState extends State<DetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                  5,
+                  4,
                   (index) => AnimatedContainer(
                         duration: Duration(microseconds: 300),
                         width: currentImage == index ? 15 : 8,

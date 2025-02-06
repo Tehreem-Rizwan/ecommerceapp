@@ -277,7 +277,7 @@ final List<Product> all = [
 
 final List<Product> Jeans = [
   Product(
-    title: "Hoodie",
+    title: "Hoods",
     description:
         "Scelerisque facilisi rhoncus non faucibus parturient senectus lobortis a ullamcorper vestibulum mi nibh ultricies a parturient gravida a vestibulum leo sem in. Est cum torquent mi in scelerisque leo aptent per at vitae ante eleifend mollis adipiscing.",
     image:

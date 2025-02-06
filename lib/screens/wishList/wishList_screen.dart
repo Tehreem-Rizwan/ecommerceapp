@@ -3,14 +3,14 @@ import 'package:ecommerceapp/provider/favorite_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({super.key});
+class WishListScreen extends StatefulWidget {
+  const WishListScreen({super.key});
 
   @override
-  State<FavouriteScreen> createState() => _FavouriteScreenState();
+  State<WishListScreen> createState() => _FavouriteScreenState();
 }
 
-class _FavouriteScreenState extends State<FavouriteScreen> {
+class _FavouriteScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = FavoriteProvider.of(context);
@@ -52,7 +52,31 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   padding: EdgeInsets.all(10),
-                                  child: Image.asset(cartItems.image),
+                                  child: Image.network(
+                                    cartItems.image, // Load image from network
+                                    fit: BoxFit.cover, // Adjust image fitting
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      } else {
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    (loadingProgress
+                                                            .expectedTotalBytes ??
+                                                        1)
+                                                : null,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10,

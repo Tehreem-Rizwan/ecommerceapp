@@ -12,7 +12,7 @@ final List<Category> categories = [
   Category(title: "Jeans", image: "assets/images/fashion-testimon-1.jpg"),
   Category(title: "T-Shirts", image: "assets/images/TSHIRTS-2.jpg"),
   Category(title: "Tracksuits", image: "assets/images/tracksuit.jpg"),
-  Category(title: "Socks", image: "assets/images/SOCKS-2.png"),
+  Category(title: "Socks", image: "assets/images/socks.jpg"),
 ];
 
 class CategoryList extends StatefulWidget {

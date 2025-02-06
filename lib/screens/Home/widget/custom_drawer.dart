@@ -1,7 +1,13 @@
 import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/screens/Home/Homepage.dart';
+import 'package:ecommerceapp/screens/about/about_screen.dart';
+import 'package:ecommerceapp/screens/contactUs/contact_us.dart';
 import 'package:ecommerceapp/screens/loginScreen/login_screen.dart';
+import 'package:ecommerceapp/screens/wishList/wishList_screen.dart';
+import 'package:ecommerceapp/shop/shop_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -20,24 +26,20 @@ class _CustomDrawerState extends State<CustomDrawer> {
         children: [
           // Drawer Header
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: kblackColor,
-            ),
+            decoration: BoxDecoration(),
             child: Column(
               children: [
                 SizedBox(height: 10),
                 Text(
                   "MENU",
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kblackColor),
                 ),
               ],
             ),
           ),
-          // Drawer items wrapped in a ListView
           Expanded(
             child: ListView(
               children: [
@@ -48,7 +50,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/home');
+                    Get.to(() => HomePage());
                   },
                 ),
                 ListTile(
@@ -58,7 +60,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/shop');
+                    Get.to(() => ShopScreen());
                   },
                 ),
                 ListTile(
@@ -68,7 +70,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/about');
+                    Get.to(() => AboutScreen());
                   },
                 ),
                 ListTile(
@@ -78,7 +80,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/contact');
+                    Get.to(() => ContactUsScreen());
                   },
                 ),
                 ListTile(
@@ -88,7 +90,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/wishlist');
+                    Get.to(() => WishListScreen());
                   },
                 ),
                 ListTile(

@@ -3,14 +3,14 @@ import 'package:ecommerceapp/models/product_model.dart';
 import 'package:ecommerceapp/screens/Home/widget/product_card.dart';
 import 'package:flutter/material.dart';
 
-class ProductGridView extends StatefulWidget {
-  const ProductGridView({super.key});
+class ShopScreen extends StatefulWidget {
+  const ShopScreen({super.key});
 
   @override
-  State<ProductGridView> createState() => _ProductGridViewState();
+  State<ShopScreen> createState() => _ProductGridViewState();
 }
 
-class _ProductGridViewState extends State<ProductGridView> {
+class _ProductGridViewState extends State<ShopScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<List<Product>> fetchProducts() {
@@ -24,7 +24,7 @@ class _ProductGridViewState extends State<ProductGridView> {
           seller: "",
           price: (doc['price'] as num).toInt(),
           colors: [],
-          category: "",
+          category: doc['category'],
           rate: 0.0,
           quantity: 1,
         );

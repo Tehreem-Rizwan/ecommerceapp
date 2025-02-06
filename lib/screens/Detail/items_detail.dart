@@ -22,7 +22,7 @@ class ItemDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "\€${product.price}",
+                  "\€ ${product.price}",
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
                 ),
                 SizedBox(

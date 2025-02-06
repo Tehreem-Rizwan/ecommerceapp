@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/models/category.dart';
 import 'package:ecommerceapp/models/product_model.dart';
-import 'package:ecommerceapp/productgrid/product_grid_view.dart';
+import 'package:ecommerceapp/shop/shop_screen.dart';
 import 'package:ecommerceapp/screens/Home/widget/Searchbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/custom_drawer.dart';
 import 'package:ecommerceapp/screens/Home/widget/image_slider.dart';
@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProductGridView()));
+                              builder: (context) => ShopScreen()));
                     },
                     child: Text(
                       "See all",

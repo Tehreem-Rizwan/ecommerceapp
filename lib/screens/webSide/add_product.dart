@@ -63,7 +63,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
               controller: categoryController,
               decoration: InputDecoration(
                 labelText: "Category",
-                labelStyle: TextStyle(color: kgreyColor), // Setting text color
               ),
             ),
             TextField(

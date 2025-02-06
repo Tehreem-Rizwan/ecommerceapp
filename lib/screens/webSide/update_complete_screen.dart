@@ -4,7 +4,6 @@ import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/models/product_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UpdateCompleteScreen extends StatefulWidget {
