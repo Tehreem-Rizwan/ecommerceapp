@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/provider/cart_provider.dart';
+import 'package:ecommerceapp/screens/payment/paypal_payment_method.dart';
 import 'package:ecommerceapp/screens/shipping_address_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,18 +21,25 @@ class _PaymentMethodState extends State<PaymentMethod> {
       });
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final provider = CartProvider.of(context);
-    final double subtotal =
-        provider.totalPrice(); // Assuming this is your subtotal calculation
+    final double subtotal = provider.totalPrice(); // Subtotal calculation
     final double shippingFee = 100.0; // Fixed shipping fee
     final double total = subtotal + shippingFee;
     Size size = MediaQuery.of(context).size;
+    void _storePaymentMethod(String userId, String method) async {
+      try {
+        await FirebaseFirestore.instance.collection('payments').add({
+          'userId': userId, // Replace with the logged-in user ID
+          'paymentMethod': method,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+        print("Payment method stored successfully");
+      } catch (e) {
+        print("Error storing payment method: $e");
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -50,127 +59,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
             child: Center(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    width: size.width,
-                    height: 55,
-                    margin: EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                      border: _type == 1
-                          ? Border.all(width: 1, color: Colors.red)
-                          : Border.all(width: 0.3, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 1,
-                                  groupValue: _type,
-                                  onChanged: _handleRadio,
-                                  activeColor: Colors.red,
-                                ),
-                                Text(
-                                  "Amazon Pay",
-                                  style: _type == 1
-                                      ? TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
-                                        )
-                                      : TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.grey,
-                                        ),
-                                ),
-                              ],
-                            ),
-                            Image.asset(
-                              "assets/images/amazon_pay.png",
-                              width: 70,
-                              height: 70,
-                              fit: BoxFit.cover,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: size.width,
-                    height: 55,
-                    margin: EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                      border: _type == 2
-                          ? Border.all(width: 1, color: Colors.red)
-                          : Border.all(width: 0.3, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 2,
-                                  groupValue: _type,
-                                  onChanged: _handleRadio,
-                                  activeColor: Colors.red,
-                                ),
-                                Text(
-                                  "Credit Card",
-                                  style: _type == 2
-                                      ? TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
-                                        )
-                                      : TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.grey,
-                                        ),
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            Image.asset(
-                              "assets/images/visa.png",
-                              width: 40,
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Image.asset(
-                              "assets/images/mastercard.png",
-                              width: 40,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 40),
+                  // PayPal Option
                   Container(
                     width: size.width,
                     height: 55,
@@ -199,17 +89,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                 ),
                                 Text(
                                   "PayPal",
-                                  style: _type == 3
-                                      ? TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
-                                        )
-                                      : TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.grey,
-                                        ),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                    color:
+                                        _type == 3 ? Colors.black : Colors.grey,
+                                  ),
                                 ),
                               ],
                             ),
@@ -223,64 +108,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: size.width,
-                    height: 55,
-                    margin: EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                      border: _type == 4
-                          ? Border.all(width: 1, color: Colors.red)
-                          : Border.all(width: 0.3, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 4,
-                                  groupValue: _type,
-                                  onChanged: _handleRadio,
-                                  activeColor: Colors.red,
-                                ),
-                                Text(
-                                  "Google Pay",
-                                  style: _type == 4
-                                      ? TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
-                                        )
-                                      : TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.grey,
-                                        ),
-                                ),
-                              ],
-                            ),
-                            Image.asset(
-                              "assets/images/icon2.png",
-                              width: 60,
-                              height: 60,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 15),
+                  // COD Option
                   Container(
                     width: size.width,
                     height: 55,
@@ -309,17 +138,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                 ),
                                 Text(
                                   "COD (Cash on Delivery)",
-                                  style: _type == 5
-                                      ? TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
-                                        )
-                                      : TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.grey,
-                                        ),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                    color:
+                                        _type == 5 ? Colors.black : Colors.grey,
+                                  ),
                                 ),
                               ],
                             ),
@@ -328,9 +152,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
+                  SizedBox(height: 100),
+                  // Price Details
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -342,7 +165,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "\$${subtotal.toStringAsFixed(2)}",
+                        "\€ ${subtotal.toStringAsFixed(2)}",
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -350,9 +173,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -364,7 +185,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "\$${shippingFee.toStringAsFixed(2)}",
+                        "\€ ${shippingFee.toStringAsFixed(2)}",
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -372,15 +193,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
+                  Divider(color: Colors.black),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -392,7 +207,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "\$${total.toStringAsFixed(2)}",
+                        "\€ ${total.toStringAsFixed(2)}",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -400,15 +215,32 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 90,
-                  ),
+                  SizedBox(height: 90),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      String userId =
+                          "USER_ID_HERE"; // Replace with the actual user ID
+                      if (_type == 3) {
+                        _storePaymentMethod(userId, "PayPal");
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ShippingAddress()));
+                              builder: (context) =>
+                                  PaypalPaymentMethodScreen()),
+                        );
+                      } else if (_type == 5) {
+                        _storePaymentMethod(userId, "Cash on Delivery");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ShippingAddress()),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text("Please select a payment method")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kprimaryColor,
@@ -421,7 +253,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

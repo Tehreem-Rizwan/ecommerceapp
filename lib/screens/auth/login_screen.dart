@@ -2,8 +2,8 @@ import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Add Firebase Auth
 import 'package:ecommerceapp/components/UIHelper.dart';
-import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
-import 'package:ecommerceapp/screens/loginScreen/registration.dart';
+import 'package:ecommerceapp/screens/auth/mytextfield.dart';
+import 'package:ecommerceapp/screens/auth/registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

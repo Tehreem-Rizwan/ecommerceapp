@@ -93,7 +93,7 @@ class _CartScreenState extends State<CartScreen> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   padding: EdgeInsets.all(10),
-                                  child: Image.asset(cartItems.image),
+                                  child: Image.network(cartItems.image),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -121,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                      "\$${cartItems.price}",
+                                      "\€ ${cartItems.price}",
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,

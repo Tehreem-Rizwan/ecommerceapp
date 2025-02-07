@@ -1,6 +1,6 @@
 import 'package:ecommerceapp/components/UIHelper.dart';
 import 'package:ecommerceapp/components/constants.dart';
-import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
+import 'package:ecommerceapp/screens/auth/mytextfield.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

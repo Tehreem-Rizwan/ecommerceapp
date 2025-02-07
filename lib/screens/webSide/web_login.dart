@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/screens/webSide/web_main.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth import
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecommerceapp/components/UIHelper.dart';
-import 'package:ecommerceapp/screens/loginScreen/mytextfield.dart';
+import 'package:ecommerceapp/screens/auth/mytextfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerceapp/components/constants.dart';

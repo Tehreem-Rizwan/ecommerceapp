@@ -1,8 +1,8 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/webSide/add_product.dart';
-import 'package:ecommerceapp/screens/webSide/dashboard_screen.dart';
 import 'package:ecommerceapp/screens/webSide/delete_product.dart';
 import 'package:ecommerceapp/screens/webSide/update_product.dart';
+import 'package:ecommerceapp/screens/webSide/view_cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
@@ -15,20 +15,15 @@ class WebMainScreen extends StatefulWidget {
 }
 
 class _WebMainScreenState extends State<WebMainScreen> {
-  Widget selectedScreen = DashBoardScreen();
+  Widget selectedScreen = AddProductScreen();
 
-  // Handle nullable route
   void chooseScreen(String? route) {
     switch (route) {
-      case DashBoardScreen.id:
-        setState(() {
-          selectedScreen = DashBoardScreen();
-        });
-        break;
       case AddProductScreen.id:
         setState(() {
           selectedScreen = AddProductScreen();
         });
+
         break;
       case UpdateProductScreen.id:
         setState(() {
@@ -39,10 +34,14 @@ class _WebMainScreenState extends State<WebMainScreen> {
         setState(() {
           selectedScreen = DeleteProductScreen();
         });
+      case ViewCartScreen.id:
+        setState(() {
+          selectedScreen = ViewCartScreen();
+        });
         break;
       default:
         setState(() {
-          selectedScreen = DashBoardScreen(); // Default to dashboard
+          selectedScreen = AddProductScreen(); // Default to dashboard
         });
     }
   }
@@ -68,13 +67,9 @@ class _WebMainScreenState extends State<WebMainScreen> {
         backgroundColor: kprimaryColor,
         textStyle: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
         onSelected: (item) {
-          chooseScreen(item.route ?? DashBoardScreen.id);
+          chooseScreen(item.route ?? AddProductScreen.id);
         },
         items: [
-          AdminMenuItem(
-              title: "DASHBOARD",
-              icon: Icons.dashboard,
-              route: DashBoardScreen.id),
           AdminMenuItem(
               title: "ADD PRODUCTS",
               icon: Icons.add,
@@ -87,7 +82,10 @@ class _WebMainScreenState extends State<WebMainScreen> {
               title: "DELETE PRODUCTS",
               icon: Icons.delete,
               route: DeleteProductScreen.id),
-          AdminMenuItem(title: "CART ITEMS", icon: Icons.shop_2_outlined),
+          AdminMenuItem(
+              title: "CART ITEMS",
+              icon: Icons.shop_2_outlined,
+              route: ViewCartScreen.id),
         ],
         selectedRoute: WebMainScreen.id,
       ),

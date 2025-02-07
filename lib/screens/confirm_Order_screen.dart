@@ -1,313 +1,217 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:ecommerceapp/screens/order_success_screen.dart';
-import 'package:ecommerceapp/screens/payment/payment_method_screen.dart';
-import 'package:ecommerceapp/screens/shipping_address_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ConfirmOrder extends StatelessWidget {
+class ConfirmOrder extends StatefulWidget {
   const ConfirmOrder({super.key});
+
+  @override
+  _ConfirmOrderState createState() => _ConfirmOrderState();
+}
+
+class _ConfirmOrderState extends State<ConfirmOrder> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String fullName = "Loading...";
+  String mobile = "Loading...";
+  String address = "Loading...";
+  String userCity = "Loading...";
+  String state = "Loading...";
+  String zipcode = "Loading...";
+  String userCountry = "Loading...";
+  String paymentMethod = "Cash on Delivery";
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final User? user = _auth.currentUser;
+      if (user != null) {
+        DocumentSnapshot userDoc =
+            await _firestore.collection('orders').doc(user.uid).get();
+
+        if (userDoc.exists) {
+          setState(() {
+            fullName = userDoc["full_name"] ?? "No Name";
+            mobile = userDoc["mobile"] ?? "No Mobile";
+            address = userDoc["address"] ?? "No Address";
+            userCity = userDoc["city"] ?? "No City";
+            state = userDoc["state"] ?? "No State";
+            zipcode = userDoc["zip_code"] ?? "No Zipcode";
+            userCountry = userDoc["country"] ?? "No Country";
+            paymentMethod = userDoc["paymentMethod"] ?? "Cash on Delivery";
+          });
+        }
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = CartProvider.of(context);
-    final double subtotal =
-        provider.totalPrice(); // Assuming this is your subtotal calculation
-    final double shippingFee = 100.0; // Fixed shipping fee
+    final double subtotal = provider.totalPrice();
+    final double shippingFee = 100.0;
     final double total = subtotal + shippingFee;
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Confirm Order",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          leading: BackButton(),
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
-          elevation: 0,
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(20),
+      appBar: AppBar(
+        title: const Text("Confirm Order",
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        leading: const BackButton(),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Shipping Address",
-                      style:
-                          TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      width: MediaQuery.of(context).size.width,
-                      height: 110,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 4,
-                                spreadRadius: 2)
-                          ]),
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Dear Tehreem",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ShippingAddress()));
-                                      },
-                                      child: Text(
-                                        "Change",
-                                        style: TextStyle(
-                                            fontSize: 18, color: Colors.red),
-                                      )),
-                                ]),
-                            Text(
-                              "3 NewBridge Court",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              "Chino Hills, CA ,2843, United States",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Payment Method",
-                          style: TextStyle(
-                              fontSize: 19, fontWeight: FontWeight.w600),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PaymentMethod()));
-                            },
-                            child: Text(
-                              "Change",
-                              style: TextStyle(fontSize: 18, color: Colors.red),
-                            )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 80,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 4,
-                                    spreadRadius: 2)
-                              ]),
-                          child: Image.asset(
-                            "assets/images/mastercard.png",
-                            width: 40,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Text("**** **** **** 1321")
-                      ],
-                    ),
-                    Text(
-                      "Delievery Method",
-                      style:
-                          TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 60,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 4,
-                                    spreadRadius: 2)
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Image.asset(
-                                "assets/images/icon3.png",
-                                height: 25,
-                              ),
-                              Text("2-7 Days")
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          height: 60,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 4,
-                                    spreadRadius: 2)
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "Home Delivery",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.indigo,
-                                ),
-                              ),
-                              Text("2-7 Days")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 80,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Subtotal",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "\$${subtotal.toStringAsFixed(2)}",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Shipping Fee",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "\$${shippingFee.toStringAsFixed(2)}",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Divider(
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Total",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "\$${total.toStringAsFixed(2)}",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderSuccessScreen()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kprimaryColor,
-                        minimumSize: Size(double.infinity, 55),
-                      ),
-                      child: Text(
-                        "Confirm Order",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ]),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sectionTitle("Shipping Address"),
+                  addressContainer(),
+                  const SizedBox(height: 40),
+                  sectionTitle("Payment Method"),
+                  paymentMethodContainer(),
+                  const SizedBox(height: 40),
+                  sectionTitle("Delivery Method"),
+                  deliveryMethodContainer(),
+                  const SizedBox(height: 50),
+                  orderSummary(subtotal, shippingFee, total),
+                  const SizedBox(height: 50),
+                  confirmOrderButton(),
+                ],
+              ),
             ),
-          ),
-        ));
+    );
+  }
+
+  Widget sectionTitle(String title) {
+    return Text(title,
+        style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600));
+  }
+
+  Widget addressContainer() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      width: double.infinity,
+      height: 110,
+      decoration: containerDecoration(),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Dear $fullName", style: const TextStyle(fontSize: 16)),
+                Text("Mobile No: $mobile",
+                    style: const TextStyle(fontSize: 16)),
+              ],
+            ),
+            Text(address, style: const TextStyle(fontSize: 16)),
+            Text("$userCity, $state, $zipcode, $userCountry",
+                style: const TextStyle(fontSize: 16)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget paymentMethodContainer() {
+    return Row(
+      children: [
+        Container(
+          height: 50,
+          width: 80,
+          decoration: containerDecoration(),
+          child: const Icon(Icons.payments, size: 30, color: Colors.black54),
+        ),
+        const SizedBox(width: 10),
+        Text(paymentMethod, style: const TextStyle(fontSize: 16)),
+      ],
+    );
+  }
+
+  Widget deliveryMethodContainer() {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: containerDecoration(),
+      child: const Text("Home Delivery (2-7 Days)",
+          style: TextStyle(fontSize: 16)),
+    );
+  }
+
+  Widget orderSummary(double subtotal, double shippingFee, double total) {
+    return Column(
+      children: [
+        summaryRow("Subtotal", subtotal),
+        summaryRow("Shipping Fee", shippingFee),
+        const Divider(color: Colors.black),
+        summaryRow("Total", total, isTotal: true),
+      ],
+    );
+  }
+
+  Widget summaryRow(String label, double amount, {bool isTotal = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label,
+              style: TextStyle(
+                  color: isTotal ? Colors.black : Colors.grey,
+                  fontSize: isTotal ? 18 : 16,
+                  fontWeight: FontWeight.bold)),
+          Text("€ ${amount.toStringAsFixed(2)}",
+              style: TextStyle(
+                  color: isTotal ? Colors.black : Colors.grey,
+                  fontSize: isTotal ? 18 : 16,
+                  fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  Widget confirmOrderButton() {
+    return ElevatedButton(
+      onPressed: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const OrderSuccessScreen())),
+      style: ElevatedButton.styleFrom(
+          backgroundColor: kprimaryColor,
+          minimumSize: const Size(double.infinity, 55)),
+      child: const Text("Confirm Order",
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+    );
+  }
+
+  BoxDecoration containerDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: [
+        const BoxShadow(color: Colors.black12, blurRadius: 4, spreadRadius: 2)
+      ],
+    );
   }
 }

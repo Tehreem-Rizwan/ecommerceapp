@@ -1,15 +1,16 @@
-import 'package:ecommerceapp/components/constants.dart';
+import 'package:ecommerceapp/components/controller/language_change_controller.dart';
 import 'package:ecommerceapp/models/category.dart';
 import 'package:ecommerceapp/models/product_model.dart';
+import 'package:ecommerceapp/screens/cart/cart_icon.dart';
 import 'package:ecommerceapp/shop/shop_screen.dart';
 import 'package:ecommerceapp/screens/Home/widget/Searchbar.dart';
 import 'package:ecommerceapp/screens/Home/widget/custom_drawer.dart';
 import 'package:ecommerceapp/screens/Home/widget/image_slider.dart';
 import 'package:ecommerceapp/screens/Home/widget/product_card.dart';
-import 'package:ecommerceapp/screens/cart/Cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +18,8 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+enum Language { english, french }
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
@@ -71,15 +74,41 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         actions: [
+          Consumer<LanguageChangeController>(
+            builder: (context, provider, child) {
+              return PopupMenuButton<Locale>(
+                onSelected: (Locale locale) {
+                  provider.changeLanguage(locale); // Update language
+                },
+                icon: Icon(Icons.language),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: Locale('en'),
+                    child: Row(
+                      children: [
+                        Image.asset('assets/images/en(2).png', width: 28),
+                        SizedBox(width: 10),
+                        Text("English"),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: Locale('fr'),
+                    child: Row(
+                      children: [
+                        Image.asset('assets/images/en(1).png', width: 28),
+                        SizedBox(width: 10),
+                        Text("French"),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              onPressed: () {
-                Get.to(CartScreen());
-              },
-              icon: Icon(Icons.shopping_cart_outlined,
-                  color: kblackColor, size: 25),
-            ),
+            child: CartIcon(),
           ),
         ],
       ),
@@ -95,7 +124,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 20),
               ImageSlider(),
               SizedBox(height: 20),
-
               SizedBox(
                 height: 130,
                 child: ListView.builder(
@@ -111,12 +139,6 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: selectedIndex == index
-                              ? Colors.blue[100]
-                              : Colors.transparent,
-                        ),
                         child: Column(
                           children: [
                             Container(
@@ -143,13 +165,11 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-
-              // Category Section Title
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Special For You",
+                    AppLocalizations.of(context)!.specialforyou,
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
                   ),
                   TextButton(
@@ -160,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => ShopScreen()));
                     },
                     child: Text(
-                      "See all",
+                      AppLocalizations.of(context)!.seeall,
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -169,8 +189,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-
-              // Product Grid for Selected Category
               GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

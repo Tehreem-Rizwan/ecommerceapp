@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ecommerceapp/screens/loginScreen/login_screen.dart';
+import 'package:ecommerceapp/screens/auth/login_screen.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

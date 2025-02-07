@@ -61,7 +61,7 @@ class CheckBox extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$${provider.totalPrice()}",
+                "\€ ${provider.totalPrice()}",
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 16,
@@ -87,7 +87,7 @@ class CheckBox extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$${provider.totalPrice()}",
+                "\€ ${provider.totalPrice()}",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
