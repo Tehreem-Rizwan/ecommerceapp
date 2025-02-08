@@ -70,7 +70,7 @@ class ItemDetails extends StatelessWidget {
               ],
             ),
             SizedBox(
-              width: 70,
+              width: 30,
             ),
             Text.rich(
               TextSpan(children: [

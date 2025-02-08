@@ -6,6 +6,7 @@ class CartProvider extends ChangeNotifier {
   final List<Product> _cart = [];
 
   List<Product> get cart => _cart;
+
   void toggleFavorite(Product product) {
     if (_cart.contains(product)) {
       for (Product element in _cart) {
@@ -17,14 +18,32 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  incrementQtn(int index) => _cart[index].quantity++;
-  decrementQtn(int index) => _cart[index].quantity--;
+  incrementQtn(int index) {
+    _cart[index].quantity++;
+    notifyListeners();
+  }
+
+  decrementQtn(int index) {
+    if (_cart[index].quantity > 1) {
+      _cart[index].quantity--;
+    } else {
+      _cart.removeAt(index);
+    }
+    notifyListeners();
+  }
+
   totalPrice() {
     double total1 = 0.0;
     for (Product element in _cart) {
       total1 += element.price * element.quantity;
     }
     return total1;
+  }
+
+  // ✅ New Method to Clear Cart
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
   }
 
   static CartProvider of(

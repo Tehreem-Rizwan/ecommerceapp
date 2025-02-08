@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/provider/cart_provider.dart';
 import 'package:ecommerceapp/screens/order_success_screen.dart';
+import 'package:ecommerceapp/screens/payment/payment_method_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -72,7 +73,12 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
       appBar: AppBar(
         title: const Text("Confirm Order",
             style: TextStyle(fontWeight: FontWeight.bold)),
-        leading: const BackButton(),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => PaymentMethod()));
+            },
+            icon: Icon(Icons.arrow_back_ios)),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,

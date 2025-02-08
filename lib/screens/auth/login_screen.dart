@@ -85,7 +85,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                   SizedBox(height: 50),
                   const Text(
                     "Welcome to the Clothing Store",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 50),
                   MyTextfield(

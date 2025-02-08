@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 defaultTransition: Transition.fadeIn,
                 locale: provider.appLocale ?? initialLocale,
-                localizationsDelegates: const [
+                localizationsDelegates: [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,

@@ -19,7 +19,7 @@ class _FavouriteScreenState extends State<WishListScreen> {
       backgroundColor: kcontentColor,
       appBar: AppBar(
         title: Text(
-          "Favorites",
+          "WishList",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

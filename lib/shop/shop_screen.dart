@@ -37,7 +37,6 @@ class _ProductGridViewState extends State<ShopScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Shop", style: TextStyle(fontWeight: FontWeight.bold)),
-        leading: BackButton(),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
