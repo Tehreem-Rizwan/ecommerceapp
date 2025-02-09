@@ -83,5 +83,4 @@ class DefaultFirebaseOptions {
     authDomain: 'w-52931.firebaseapp.com',
     storageBucket: 'wsecure.appspot.com',
   );
-
 }
