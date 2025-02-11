@@ -60,7 +60,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
               child: Column(
                 children: [
                   SizedBox(height: 40),
-                  // PayPal Option
                   Container(
                     width: size.width,
                     height: 55,

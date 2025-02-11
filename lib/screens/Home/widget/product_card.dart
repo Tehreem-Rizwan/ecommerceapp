@@ -57,8 +57,8 @@ class _ProductCardState extends State<ProductCard> {
                       provider.toggleFavorite(widget.product);
                     },
                     child: Container(
-                      width: 50,
-                      height: 50,
+                      width: 45,
+                      height: 45,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -66,7 +66,7 @@ class _ProductCardState extends State<ProductCard> {
                       child: Icon(
                         Icons.favorite_outline_outlined,
                         color: isFavorite ? kprimaryColor : kblackColor,
-                        size: 24,
+                        size: 22,
                       ),
                     ),
                   ),
@@ -81,7 +81,7 @@ class _ProductCardState extends State<ProductCard> {
                   Text(
                     widget.product.title,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

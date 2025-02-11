@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/components/controller/language_change_controller.dart';
 import 'package:ecommerceapp/models/category.dart';
 import 'package:ecommerceapp/models/product_model.dart';
@@ -22,6 +23,50 @@ class HomePage extends StatefulWidget {
 enum Language { english, french }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Stream<List<Product>> fetchProducts() {
+    if (selectedIndex == 0) {
+      return _firestore.collection('products').snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return Product(
+            title: doc['name'],
+            description: "",
+            image: doc['imageUrl'],
+            review: "",
+            seller: "",
+            price: (doc['price'] as num).toInt(),
+            colors: [],
+            category: doc['category'],
+            rate: 0.0,
+            quantity: 1,
+          );
+        }).toList();
+      });
+    } else {
+      String selectedCategory = categories[selectedIndex].title;
+      return _firestore
+          .collection('products')
+          .where('category', isEqualTo: selectedCategory)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return Product(
+            title: doc['name'],
+            description: "",
+            image: doc['imageUrl'],
+            review: "",
+            seller: "",
+            price: (doc['price'] as num).toInt(),
+            colors: [],
+            category: doc['category'],
+            rate: 0.0,
+            quantity: 1,
+          );
+        }).toList();
+      });
+    }
+  }
+
   int selectedIndex = 0;
   String searchQuery = '';
   ScrollController _scrollController = ScrollController();
@@ -189,19 +234,33 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.78,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                ),
-                itemCount: selectedCategories[selectedIndex].length,
-                itemBuilder: (context, index) {
-                  return ProductCard(
-                    product: selectedCategories[selectedIndex][index],
+              StreamBuilder<List<Product>>(
+                stream: fetchProducts(), // Fetch products from Firestore
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                        child: CircularProgressIndicator()); // Loading state
+                  }
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text("No products available"));
+                  }
+
+                  List<Product> products = snapshot.data!;
+
+                  return GridView.builder(
+                    physics:
+                        NeverScrollableScrollPhysics(), // Prevents scrolling of GridView
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.78,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(product: products[index]);
+                    },
                   );
                 },
               ),

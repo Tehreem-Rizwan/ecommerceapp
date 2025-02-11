@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/components/constants.dart';
 import 'package:ecommerceapp/screens/navigationbar_Screen.dart';
+import 'package:ecommerceapp/screens/payment/payment_method_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Add Firebase Auth
 import 'package:ecommerceapp/components/UIHelper.dart';
 import 'package:ecommerceapp/screens/auth/mytextfield.dart';
@@ -33,25 +34,19 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
     }
   }
 
-  // Login Function
   void logIn(String email, String password) async {
     setState(() {
-      isLoading = true; // Show loading indicator while logging in
+      isLoading = true;
     });
 
     try {
-      // Sign in with email and password
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      // On successful login, navigate to HomePage
       print("Login Successful for user: ${userCredential.user!.email}");
 
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  BottomNavBar())); // Replace with your homepage route
+          context, MaterialPageRoute(builder: (context) => PaymentMethod()));
     } on FirebaseAuthException catch (e) {
       // Show specific error messages
       if (e.code == 'user-not-found') {
