@@ -1,1 +1,76 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"wsecure","appId":"1:313393556956:android:bffee7cff81f4add54b319","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"wsecure","configurations":{"android":"1:313393556956:android:bffee7cff81f4add54b319","ios":"1:313393556956:ios:2861211da10ae44254b319","macos":"1:313393556956:ios:2861211da10ae44254b319","web":"1:313393556956:web:5311aef3a99af76854b319","windows":"1:313393556956:web:68a687685925c05854b319"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "wsecure",
+          "appId": "1:313393556956:android:bffee7cff81f4add54b319",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "wsecure",
+          "configurations": {
+            "android": "1:313393556956:android:bffee7cff81f4add54b319",
+            "ios": "1:313393556956:ios:2861211da10ae44254b319",
+            "macos": "1:313393556956:ios:2861211da10ae44254b319",
+            "web": "1:313393556956:web:5311aef3a99af76854b319",
+            "windows": "1:313393556956:web:68a687685925c05854b319"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "dataconnect": {
+      "dataDir": "dataconnect/.dataconnect/pgliteData",
+      "port": 9399
+    },
+    "apphosting": {
+      "port": 5002,
+      "rootDirectory": "./"
+    },
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  },
+  "dataconnect": {
+    "source": "dataconnect"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  },
+  "extensions": {},
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

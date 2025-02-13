@@ -16,7 +16,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    // Timer to show splash screen for 3 seconds
     Timer(Duration(seconds: 3), () {
       if (mounted) {
         setState(() {
